@@ -1,0 +1,25 @@
+{
+  "name": "employee_tracker_via_sql-nodejs",
+  "version": "1.0.0",
+  "description": "This application will give employers the ability to manage and organize their work units quickly and efficiently via a command line application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brad-Hambrick/Employee_Tracker_via_Sql-Nodejs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Brad-Hambrick/Employee_Tracker_via_Sql-Nodejs/issues"
+  },
+  "homepage": "https://github.com/Brad-Hambrick/Employee_Tracker_via_Sql-Nodejs#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^8.2.4",
+    "mysql2": "^2.3.3"
+  }
+}
