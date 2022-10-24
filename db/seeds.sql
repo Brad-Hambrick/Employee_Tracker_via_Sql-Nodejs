@@ -1,11 +1,10 @@
-INSERT INTO department (name)
-VALUES ('Engineering)'),('Finance'),('Legal'),('Sales');
+INSERT INTO departments (name)
+VALUES ('Engineering'),('Finance'),('Legal'),('Sales');
 
-SELECT * FROM department;
+SELECT * FROM departments;
 
-INSERT INTO role (title, salary, department_id)
-VALUES 
-('Lead Engineer', 150000, 1),
+INSERT INTO roles (title, salary, department_id)
+VALUES ('Lead Engineer', 150000, 1),
 ('Software Engineer', 120000, 1),
 ('Account Manager', 120000, 2),
 ('Accountant', 85000, 2),
@@ -14,11 +13,10 @@ VALUES
 ('Sales Lead', 125000, 4),
 ('Salesperson', 75000, 4);
 
-SELECT * FROM role;
+SELECT * FROM roles;
 
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES 
-('Brad', 'Hambrick', 1, 1),
+INSERT INTO employees (first_name, last_name, role_id, manager_id)
+VALUES ('Brad', 'Hambrick', 1, 1),
 ('Annie', 'Hambrick', 1, NULL),
 ('Minnie', 'Hambrick', 2, 3),
 ('Sadie', 'Hambrick', 2, NULL),
@@ -27,4 +25,4 @@ VALUES
 ('Lynn', 'Hambrick', 4, 7),
 ('Brixlee', 'Hambrick', 4, NULL);
 
-SELECT * FROM employee;
+SELECT * FROM employees;
