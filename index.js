@@ -1,3 +1,4 @@
+// Bring in required packages
 require('dotenv').config();
 const connection = require('./config/connections');
 const mysql2 = require('mysql2');
@@ -5,7 +6,7 @@ const inquirer = require('inquirer');
 const cTable = require('console.table');
 const figlet = require('figlet');
 
-
+//  Create connection to mysql as well as start the application and display the figlet art
 connection.connect((err) => {
     if (err) throw err;
     console.log(`You are connected to the Database`)
@@ -21,7 +22,7 @@ connection.connect((err) => {
 });
 
 
-
+// Main menu to navigate the application.
 function beginTracker() {
     const firstAction = [{
         type: 'list',
@@ -33,6 +34,7 @@ function beginTracker() {
         
     }]
 
+    //  call inquirer and run a switch case to direct user choices
     inquirer.prompt(firstAction)
     .then(function(answers) {
         switch (answers.action) {
@@ -58,6 +60,7 @@ function beginTracker() {
         console.error(err);
     });
 
+    //  sql statements that will view all departments, roles, and employees
     const viewAll = (table) => {
         let query;
         if (table === 'DEPARTMENT') {
@@ -78,6 +81,7 @@ function beginTracker() {
         });
     };
 
+    //  Function to add a new department into the database
     function addNewDepartment() {
         let newDepartment = [{
             type: 'input',
@@ -98,7 +102,9 @@ function beginTracker() {
         });
     }
 
+    //  Function to add a new employee to the database
     function addNewEmployee(){
+        //  Pull current manager data to add who the new employee's manager will be
         connection.query('SELECT * FROM employees;', (err, empRes) => {
             if (err) throw err;
             let managerChoice = [
@@ -115,7 +121,7 @@ function beginTracker() {
                     }
                 )
             });
-
+            //  Pull all roles in order to pick the role of the new employee
             connection.query('SELECT * FROM roles;', (err, roleRes) => {
                 if (err) throw err;
                 let rolePick = [];
@@ -127,7 +133,8 @@ function beginTracker() {
                         }
                     )
                 });
-
+            
+            //  Inquirer questions for adding a new employee    
             let employeeQuestions = [
                 {
                     type: 'input',
@@ -153,6 +160,7 @@ function beginTracker() {
                 }
             ]
 
+            //  call prompts and add new employee data to the database
             inquirer.prompt(employeeQuestions)
             .then(answers => {
                 let query = `INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?);`;
@@ -170,8 +178,9 @@ function beginTracker() {
         })
     }
 
+    //  Function to add a new role
     function addNewRole() {
-
+        //  Pull all departments in order to choose which department the role will fall under
         let departments = [];
         connection.query('SELECT * FROM departments;', (err, res) => {
             if (err) throw err;
@@ -183,7 +192,8 @@ function beginTracker() {
                 departments.push(chooseDepart);
                 })
             })
-
+        
+        //  Questions for the new role    
         let newRole = [
             {
                 type: 'input',
@@ -203,6 +213,7 @@ function beginTracker() {
             }
         ];
 
+        //  Call inquirer prompt and then insert the new role data into the database
         inquirer.prompt(newRole)
         .then(answers => {
             let query = `INSERT INTO roles (title, salary, department_id) VALUES(?);`;
@@ -217,8 +228,9 @@ function beginTracker() {
         })
         }
 
+    //  Function to update a current employee's role
     function updateRole() {
-
+        //  Pull all employess in order to choose which employees role to update
         connection.query('SELECT * FROM employees;', (err, empRes) => {
             if (err) throw err;
             let employeePick = [];
@@ -231,6 +243,7 @@ function beginTracker() {
                 );
             });
 
+        //  Pull all roles in order to select what the employees new role will be    
         connection.query('SELECT * FROM roles;', (err, roleRes) => {
             if (err) throw err;
             let roleChoice = [];
@@ -243,6 +256,7 @@ function beginTracker() {
                 );
             });
 
+        //  inquirer questions to update an employee's role    
         let updateRoleQuestions = [
             {
                 type: 'list',
@@ -258,8 +272,10 @@ function beginTracker() {
             }
         ]
 
+        // Call inquirer prompt and insert the employees updated information.
         inquirer.prompt(updateRoleQuestions)
         .then(answers => {
+            //  question marks to add in role_id, id, and answers.id
             let query = `UPDATE employees SET ? WHERE ? = ?;`;
             connection.query(query, [
                 {
@@ -281,6 +297,7 @@ function beginTracker() {
         })
     }
 
+    //  Function to terminate the connection with inquirer and show a "Have a Good Day" figlet art.
     function thankYou() {
         figlet('Have a Good Day!', (err, data) =>{
             if (err) {

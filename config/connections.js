@@ -1,7 +1,9 @@
+//  Bring in required packages
 require('dotenv').config()
 const { default: inquirer } = require('inquirer');
 const mysql2 = require('mysql2');
 
+//  create a variable of connection details and bring in username password and database from the dotenv file
 const connection = mysql2.createConnection({
     host: 'localhost',
     port: 3306,
@@ -10,6 +12,7 @@ const connection = mysql2.createConnection({
     database: process.env.DB_NAME
 });
 
+// export connection variable
 module.exports = connection;
 
 
