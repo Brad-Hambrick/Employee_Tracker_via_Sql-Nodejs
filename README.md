@@ -5,7 +5,7 @@ This application will give employers the ability to manage and organize their wo
 [Employee_Tracker_via_Sql-Nodejs](https://github.com/Brad-Hambrick/Employee_Tracker_via_Sql-Nodejs)
 
 ##  Walk-through Video
-[Employee_Tracker_via_Sql-Nodejs walk through video]()
+[Employee_Tracker_via_Sql-Nodejs walk through video](https://drive.google.com/file/d/1xPsIHuevJHYiQv16c_EY7GCRyIpgC1zJ/view?usp=sharing)
 
 ## Description
 This project was completed in order to showcase my knowledge using MySql and Nodejs.  This project is an employee tracker that gives users the ability to quickly and easily manage their work force.
